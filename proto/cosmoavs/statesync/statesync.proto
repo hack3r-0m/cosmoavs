@@ -3,10 +3,10 @@ package cosmoavs.statesync;
 
 option go_package = "github.com/hack3r-0m/cosmoavs/x/statesync/types";
 
-// Module is the app config object of the module.
-// Learn more: https://docs.cosmos.network/main/building-modules/depinject
-message Module {
-  // authority defines the custom module authority.
-  // if not set, defaults to the governance module.
-  string authority = 1;
+message GenesisState {
+  uint64 l1_chain_id = 1;
+  uint64 l1_start_block = 2;
+
+  string registry_coordinator = 3;
+  string operator_state_retriever = 4;
 }

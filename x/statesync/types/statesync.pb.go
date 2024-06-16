@@ -22,26 +22,25 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// Module is the app config object of the module.
-// Learn more: https://docs.cosmos.network/main/building-modules/depinject
-type Module struct {
-	// authority defines the custom module authority.
-	// if not set, defaults to the governance module.
-	Authority string `protobuf:"bytes,1,opt,name=authority,proto3" json:"authority,omitempty"`
+type GenesisState struct {
+	L1ChainId              uint64 `protobuf:"varint,1,opt,name=l1_chain_id,json=l1ChainId,proto3" json:"l1_chain_id,omitempty"`
+	L1StartBlock           uint64 `protobuf:"varint,2,opt,name=l1_start_block,json=l1StartBlock,proto3" json:"l1_start_block,omitempty"`
+	RegistryCoordinator    string `protobuf:"bytes,3,opt,name=registry_coordinator,json=registryCoordinator,proto3" json:"registry_coordinator,omitempty"`
+	OperatorStateRetriever string `protobuf:"bytes,4,opt,name=operator_state_retriever,json=operatorStateRetriever,proto3" json:"operator_state_retriever,omitempty"`
 }
 
-func (m *Module) Reset()         { *m = Module{} }
-func (m *Module) String() string { return proto.CompactTextString(m) }
-func (*Module) ProtoMessage()    {}
-func (*Module) Descriptor() ([]byte, []int) {
+func (m *GenesisState) Reset()         { *m = GenesisState{} }
+func (m *GenesisState) String() string { return proto.CompactTextString(m) }
+func (*GenesisState) ProtoMessage()    {}
+func (*GenesisState) Descriptor() ([]byte, []int) {
 	return fileDescriptor_79cfa6d94e46d81f, []int{0}
 }
-func (m *Module) XXX_Unmarshal(b []byte) error {
+func (m *GenesisState) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *Module) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *GenesisState) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_Module.Marshal(b, m, deterministic)
+		return xxx_messageInfo_GenesisState.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -51,27 +50,48 @@ func (m *Module) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (m *Module) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Module.Merge(m, src)
+func (m *GenesisState) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GenesisState.Merge(m, src)
 }
-func (m *Module) XXX_Size() int {
+func (m *GenesisState) XXX_Size() int {
 	return m.Size()
 }
-func (m *Module) XXX_DiscardUnknown() {
-	xxx_messageInfo_Module.DiscardUnknown(m)
+func (m *GenesisState) XXX_DiscardUnknown() {
+	xxx_messageInfo_GenesisState.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Module proto.InternalMessageInfo
+var xxx_messageInfo_GenesisState proto.InternalMessageInfo
 
-func (m *Module) GetAuthority() string {
+func (m *GenesisState) GetL1ChainId() uint64 {
 	if m != nil {
-		return m.Authority
+		return m.L1ChainId
+	}
+	return 0
+}
+
+func (m *GenesisState) GetL1StartBlock() uint64 {
+	if m != nil {
+		return m.L1StartBlock
+	}
+	return 0
+}
+
+func (m *GenesisState) GetRegistryCoordinator() string {
+	if m != nil {
+		return m.RegistryCoordinator
+	}
+	return ""
+}
+
+func (m *GenesisState) GetOperatorStateRetriever() string {
+	if m != nil {
+		return m.OperatorStateRetriever
 	}
 	return ""
 }
 
 func init() {
-	proto.RegisterType((*Module)(nil), "cosmoavs.statesync.Module")
+	proto.RegisterType((*GenesisState)(nil), "cosmoavs.statesync.GenesisState")
 }
 
 func init() {
@@ -79,20 +99,27 @@ func init() {
 }
 
 var fileDescriptor_79cfa6d94e46d81f = []byte{
-	// 157 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x4a, 0xce, 0x2f, 0xce,
-	0xcd, 0x4f, 0x2c, 0x2b, 0xd6, 0x2f, 0x2e, 0x49, 0x2c, 0x49, 0x2d, 0xae, 0xcc, 0x4b, 0x46, 0xb0,
-	0xf4, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2, 0x85, 0x84, 0x60, 0x6a, 0xf4, 0xe0, 0x32, 0x4a, 0x6a, 0x5c,
-	0x6c, 0xbe, 0xf9, 0x29, 0xa5, 0x39, 0xa9, 0x42, 0x32, 0x5c, 0x9c, 0x89, 0xa5, 0x25, 0x19, 0xf9,
-	0x45, 0x99, 0x25, 0x95, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x08, 0x01, 0x27, 0xcf, 0x13,
-	0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc2, 0x63, 0x39, 0x86,
-	0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63, 0x88, 0xd2, 0x4f, 0xcf, 0x2c, 0xc9, 0x28, 0x4d,
-	0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0xcf, 0x48, 0x4c, 0xce, 0x36, 0x2e, 0xd2, 0x35, 0xc8, 0xd5, 0x87,
-	0x3b, 0xa7, 0x02, 0xc9, 0x41, 0x25, 0x95, 0x05, 0xa9, 0xc5, 0x49, 0x6c, 0x60, 0xd7, 0x18, 0x03,
-	0x02, 0x00, 0x00, 0xff, 0xff, 0xbc, 0xaf, 0x09, 0x14, 0xb3, 0x00, 0x00, 0x00,
+	// 268 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x4c, 0x90, 0xb1, 0x6a, 0xf3, 0x30,
+	0x14, 0x85, 0xad, 0xff, 0x0f, 0x85, 0xa8, 0xa1, 0x83, 0x5a, 0x8a, 0x27, 0x11, 0x42, 0x87, 0x2c,
+	0xb5, 0x6b, 0xb2, 0x74, 0x4e, 0x86, 0x92, 0xd5, 0xd9, 0xba, 0x08, 0x59, 0x16, 0xb1, 0x88, 0x6d,
+	0x99, 0xab, 0xdb, 0x50, 0xbf, 0x45, 0x5f, 0xa9, 0x5b, 0xc7, 0x8c, 0x1d, 0x8b, 0xfd, 0x22, 0xc5,
+	0x02, 0x27, 0xdd, 0x2e, 0xdf, 0x77, 0x2e, 0x1c, 0x0e, 0x5d, 0x28, 0xeb, 0x2a, 0x2b, 0x8f, 0x2e,
+	0x76, 0x28, 0x51, 0xbb, 0xb6, 0x56, 0x97, 0x2b, 0x6a, 0xc0, 0xa2, 0x65, 0x6c, 0xcc, 0x44, 0x67,
+	0xb3, 0xf8, 0x24, 0x74, 0xf6, 0xa2, 0x6b, 0xed, 0x8c, 0xdb, 0x0d, 0x90, 0x71, 0x7a, 0x5d, 0x26,
+	0x42, 0x15, 0xd2, 0xd4, 0xc2, 0xe4, 0x21, 0x99, 0x93, 0xe5, 0x24, 0x9d, 0x96, 0xc9, 0x66, 0x20,
+	0xdb, 0x9c, 0x3d, 0xd0, 0x9b, 0x32, 0x11, 0x0e, 0x25, 0xa0, 0xc8, 0x4a, 0xab, 0x0e, 0xe1, 0x3f,
+	0x1f, 0x99, 0x95, 0xc9, 0x6e, 0x80, 0xeb, 0x81, 0xb1, 0x84, 0xde, 0x81, 0xde, 0x1b, 0x87, 0xd0,
+	0x0a, 0x65, 0x2d, 0xe4, 0xa6, 0x96, 0x68, 0x21, 0xfc, 0x3f, 0x27, 0xcb, 0x69, 0x7a, 0x3b, 0xba,
+	0xcd, 0x45, 0xb1, 0x67, 0x1a, 0xda, 0x46, 0xc3, 0x70, 0x0b, 0xdf, 0x4f, 0x80, 0x46, 0x30, 0xfa,
+	0xa8, 0x21, 0x9c, 0xf8, 0xb7, 0xfb, 0xd1, 0xfb, 0xa6, 0xe9, 0x68, 0xd7, 0xdb, 0xaf, 0x8e, 0x93,
+	0x53, 0xc7, 0xc9, 0x4f, 0xc7, 0xc9, 0x47, 0xcf, 0x83, 0x53, 0xcf, 0x83, 0xef, 0x9e, 0x07, 0xaf,
+	0xf1, 0xde, 0x60, 0xf1, 0x96, 0x45, 0xca, 0x56, 0x71, 0x21, 0xd5, 0x61, 0x05, 0x8f, 0x4f, 0x55,
+	0x7c, 0x9e, 0xea, 0xfd, 0xcf, 0x58, 0xd8, 0x36, 0xda, 0x65, 0x57, 0x7e, 0xa9, 0xd5, 0x6f, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0x5f, 0xa8, 0x2b, 0xa1, 0x4f, 0x01, 0x00, 0x00,
 }
 
-func (m *Module) Marshal() (dAtA []byte, err error) {
+func (m *GenesisState) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -102,22 +129,39 @@ func (m *Module) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Module) MarshalTo(dAtA []byte) (int, error) {
+func (m *GenesisState) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *Module) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Authority) > 0 {
-		i -= len(m.Authority)
-		copy(dAtA[i:], m.Authority)
-		i = encodeVarintStatesync(dAtA, i, uint64(len(m.Authority)))
+	if len(m.OperatorStateRetriever) > 0 {
+		i -= len(m.OperatorStateRetriever)
+		copy(dAtA[i:], m.OperatorStateRetriever)
+		i = encodeVarintStatesync(dAtA, i, uint64(len(m.OperatorStateRetriever)))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x22
+	}
+	if len(m.RegistryCoordinator) > 0 {
+		i -= len(m.RegistryCoordinator)
+		copy(dAtA[i:], m.RegistryCoordinator)
+		i = encodeVarintStatesync(dAtA, i, uint64(len(m.RegistryCoordinator)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.L1StartBlock != 0 {
+		i = encodeVarintStatesync(dAtA, i, uint64(m.L1StartBlock))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.L1ChainId != 0 {
+		i = encodeVarintStatesync(dAtA, i, uint64(m.L1ChainId))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -133,13 +177,23 @@ func encodeVarintStatesync(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *Module) Size() (n int) {
+func (m *GenesisState) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.Authority)
+	if m.L1ChainId != 0 {
+		n += 1 + sovStatesync(uint64(m.L1ChainId))
+	}
+	if m.L1StartBlock != 0 {
+		n += 1 + sovStatesync(uint64(m.L1StartBlock))
+	}
+	l = len(m.RegistryCoordinator)
+	if l > 0 {
+		n += 1 + l + sovStatesync(uint64(l))
+	}
+	l = len(m.OperatorStateRetriever)
 	if l > 0 {
 		n += 1 + l + sovStatesync(uint64(l))
 	}
@@ -152,7 +206,7 @@ func sovStatesync(x uint64) (n int) {
 func sozStatesync(x uint64) (n int) {
 	return sovStatesync(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *Module) Unmarshal(dAtA []byte) error {
+func (m *GenesisState) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -175,15 +229,53 @@ func (m *Module) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Module: wiretype end group for non-group")
+			return fmt.Errorf("proto: GenesisState: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Module: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: GenesisState: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field L1ChainId", wireType)
+			}
+			m.L1ChainId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowStatesync
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.L1ChainId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field L1StartBlock", wireType)
+			}
+			m.L1StartBlock = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowStatesync
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.L1StartBlock |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Authority", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryCoordinator", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -211,7 +303,39 @@ func (m *Module) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Authority = string(dAtA[iNdEx:postIndex])
+			m.RegistryCoordinator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field OperatorStateRetriever", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowStatesync
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthStatesync
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthStatesync
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.OperatorStateRetriever = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
