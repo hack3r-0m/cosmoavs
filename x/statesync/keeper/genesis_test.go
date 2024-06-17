@@ -41,20 +41,20 @@ func TestGenesis(t *testing.T) {
 
 	k.InitGenesis(ctx, genState)
 
-	if getL1ChainID(ctx, k) != 1 {
-		t.Errorf("%d %d", getL1ChainID(ctx, k), genState.L1ChainId)
+	if getL1ChainID(ctx, &k) != 1 {
+		t.Errorf("%d %d", getL1ChainID(ctx, &k), genState.L1ChainId)
 	}
 
-	if getL1StartBlock(ctx, k) != 0 {
-		t.Errorf("%d %d", getL1StartBlock(ctx, k), genState.L1StartBlock)
+	if getL1StartBlock(ctx, &k) != 0 {
+		t.Errorf("%d %d", getL1StartBlock(ctx, &k), genState.L1StartBlock)
 	}
 
-	if getRegistryCoordinator(ctx, k) != genState.RegistryCoordinator {
-		t.Errorf("%s %s", getRegistryCoordinator(ctx, k), genState.RegistryCoordinator)
+	if getRegistryCoordinator(ctx, &k) != genState.RegistryCoordinator {
+		t.Errorf("%s %s", getRegistryCoordinator(ctx, &k), genState.RegistryCoordinator)
 	}
 
-	if getOperatorStateRetriever(ctx, k) != genState.OperatorStateRetriever {
-		t.Errorf("%s %s", getOperatorStateRetriever(ctx, k), genState.OperatorStateRetriever)
+	if getOperatorStateRetriever(ctx, &k) != genState.OperatorStateRetriever {
+		t.Errorf("%s %s", getOperatorStateRetriever(ctx, &k), genState.OperatorStateRetriever)
 	}
 
 	exportedGenState := k.ExportGenesis(ctx)
