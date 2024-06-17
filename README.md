@@ -4,7 +4,7 @@
 - It facilites querying of operator set with stake for given block and quorum to be used for consensus and block advancement in cosmos chain.
 - Implementation uses `OperatorStateRetriever` contract via eigensdk
 
-This repository setup can be used as template to boostrap other modules that require interacting with eigenlayer L1 contracts
+This repository setup can also be used as template to boostrap other modules that require interacting with eigenlayer L1 contracts
 
 ## Future Improvements
 
