@@ -1,0 +1,30 @@
+syntax = "proto3";
+package cosmoavs.statesync;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+
+option go_package = "github.com/hack3r-0m/cosmoavs/x/statesync/types";
+
+service Query {
+  rpc OperatorState(QueryOperatorStateRequest)
+      returns (QueryOperatorStateResponse) {
+    option (google.api.http).get = "/cosmoavs/statesync";
+  }
+}
+
+message QueryOperatorStateRequest {
+  uint64 block = 1;
+  uint64 quorum = 2;
+}
+
+message OperatorSet {
+  string operator = 1;
+  bytes operatorId = 2;
+  bytes stake = 3;
+}
+
+message QueryOperatorStateResponse {
+  repeated OperatorSet operators = 1 [ (gogoproto.nullable) = false ];
+}
