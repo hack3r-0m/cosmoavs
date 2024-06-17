@@ -39,7 +39,7 @@ func TestGenesis(t *testing.T) {
 	genState.RegistryCoordinator = "0x0baac79acd45a023e19345c352d8a7a83c4e5656"
 	genState.OperatorStateRetriever = "0xD5D7fB4647cE79740E6e83819EFDf43fa74F8C31"
 
-	k.InitGenesis(ctx, genState)
+	k.InitGenesis(ctx, &genState)
 
 	if getL1ChainID(ctx, &k) != 1 {
 		t.Errorf("%d %d", getL1ChainID(ctx, &k), genState.L1ChainId)
