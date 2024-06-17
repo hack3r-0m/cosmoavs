@@ -113,7 +113,7 @@ func getOperatorStateRetriever(ctx sdk.Context, k *Keeper) string {
 	return value
 }
 
-func (k *Keeper) InitGenesis(ctx sdk.Context, genState types.GenesisState) {
+func (k *Keeper) InitGenesis(ctx sdk.Context, genState *types.GenesisState) {
 	rpcUrl := os.Getenv("RPC_URL")
 	if rpcUrl == "" {
 		log.Fatal("RPC_URL env not set")

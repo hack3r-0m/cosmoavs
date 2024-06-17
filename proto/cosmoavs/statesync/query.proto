@@ -3,6 +3,7 @@ package cosmoavs.statesync;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
+import "cosmos/query/v1/query.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 
 option go_package = "github.com/hack3r-0m/cosmoavs/x/statesync/types";
@@ -10,7 +11,8 @@ option go_package = "github.com/hack3r-0m/cosmoavs/x/statesync/types";
 service Query {
   rpc OperatorState(QueryOperatorStateRequest)
       returns (QueryOperatorStateResponse) {
-    option (google.api.http).get = "/cosmoavs/statesync";
+    option (cosmos.query.v1.module_query_safe) = true;
+    option (google.api.http).get = "/cosmoavs/statesync/{block}/{quorum}";
   }
 }
 

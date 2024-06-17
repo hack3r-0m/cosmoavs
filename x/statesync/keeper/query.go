@@ -10,6 +10,8 @@ import (
 	"github.com/hack3r-0m/cosmoavs/x/statesync/types"
 )
 
+var _ types.QueryServer = QueryServer{}
+
 type QueryServer struct {
 	Keeper
 }
